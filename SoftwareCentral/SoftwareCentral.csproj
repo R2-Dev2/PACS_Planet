@@ -107,14 +107,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DeliveryItem.cs" />
     <Compile Include="frmDeliveryDataPdf.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDeliveryDataPdf.Designer.cs">
       <DependentUpon>frmDeliveryDataPdf.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearch.Designer.cs">
+      <DependentUpon>frmSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSearchPlanet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchPlanet.Designer.cs">
+      <DependentUpon>frmSearchPlanet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSearchSpaceShip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchSpaceShip.Designer.cs">
+      <DependentUpon>frmSearchSpaceShip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PdfBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -123,6 +147,16 @@
   <ItemGroup>
     <EmbeddedResource Include="frmDeliveryDataPdf.resx">
       <DependentUpon>frmDeliveryDataPdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearch.resx">
+      <DependentUpon>frmSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchSpaceShip.resx">
+      <DependentUpon>frmSearchSpaceShip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +168,9 @@
       <Project>{bc79cd08-7f0e-4fe4-8abf-dab9c999b869}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />

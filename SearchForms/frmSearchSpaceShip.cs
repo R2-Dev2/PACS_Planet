@@ -7,21 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SoftwareCentral;
 
-namespace PACS_Planet
+namespace SearchForms
 {
-    public partial class Form1 : Form
+    public partial class frmSearchSpaceShip : frmSearch
     {
-        public Form1()
+        public frmSearchSpaceShip()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            frmDeliveryDataPdf form = new frmDeliveryDataPdf();
-            form.Show();
         }
     }
 }

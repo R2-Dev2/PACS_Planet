@@ -72,6 +72,11 @@ namespace CustomControls
             set { _classeCS = value; }
         }
 
+        public string getValue()
+        {
+            return txtDesc.Text;
+        }
+
         public SWCodi()
         {
             InitializeComponent();
