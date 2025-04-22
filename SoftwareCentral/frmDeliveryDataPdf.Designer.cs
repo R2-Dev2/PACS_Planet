@@ -144,7 +144,7 @@ namespace SoftwareCentral
             this.swCodPlanet.classeCS = "SoftwareCentral";
             this.swCodPlanet.codeName = "CodePlanet";
             this.swCodPlanet.controlId = "swTxtPlanet";
-            this.swCodPlanet.descName = "CodePlanet";
+            this.swCodPlanet.descName = "DescPlanet";
             this.swCodPlanet.formCS = "frmSearchPlanet";
             this.swCodPlanet.Location = new System.Drawing.Point(211, 210);
             this.swCodPlanet.Name = "swCodPlanet";

@@ -24,8 +24,13 @@ namespace SoftwareCentral
         private string tableName;
         private string query;
 
-        private string origin = "Naboo";
         private int deliveryNumber;
+
+        private string origin;
+        public string Origin
+        {
+            set { origin = value; }
+        }
         public frmDeliveryDataPdf()
         {
             InitializeComponent();

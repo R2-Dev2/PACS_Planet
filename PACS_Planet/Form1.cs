@@ -13,6 +13,7 @@ namespace PACS_Planet
 {
     public partial class Form1 : Form
     {
+        private string origin = "RAKA";
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +22,13 @@ namespace PACS_Planet
         private void button1_Click(object sender, EventArgs e)
         {
             frmDeliveryDataPdf form = new frmDeliveryDataPdf();
+            form.Origin = origin;
             form.Show();
+        }
+
+        private void btnGenerateKeys_Click(object sender, EventArgs e)
+        {
+            RSA.GenerateKeys(origin);
         }
     }
 }
