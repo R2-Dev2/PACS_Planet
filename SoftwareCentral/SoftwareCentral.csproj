@@ -107,6 +107,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Codification.cs" />
+    <Compile Include="CodificationGenerator.cs" />
     <Compile Include="RSA.cs" />
     <Compile Include="DeliveryItem.cs" />
     <Compile Include="frmDeliveryDataPdf.cs">

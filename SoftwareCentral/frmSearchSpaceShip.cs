@@ -29,8 +29,8 @@ namespace SoftwareCentral
             dtgDades.Columns["idSpaceShipType"].Visible = false;
             dtgDades.Columns["CodeSpaceShip"].HeaderText = "Code";
             dtgDades.Columns["IPSpaceShip"].HeaderText = "IP SpaceShip";
-            dtgDades.Columns["PortSpaceShip"].HeaderText = "Port SpaceShip";
-            dtgDades.Columns["PortSpaceShip1"].HeaderText = "Port SpaceShip 1";
+            dtgDades.Columns["PortSpaceShipL"].HeaderText = "Port Listen";
+            dtgDades.Columns["PortSpaceShipS"].HeaderText = "Port Send";
         }
     }
 }

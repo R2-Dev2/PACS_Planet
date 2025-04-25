@@ -34,8 +34,8 @@ namespace SoftwareCentral
             dtgDades.Columns["parsecs"].HeaderText = "Parsecs";
             dtgDades.Columns["PlanetPicture"].HeaderText = "Planet Picture";
             dtgDades.Columns["IPPlanet"].HeaderText = "IP Planet";
-            dtgDades.Columns["PortPlanet"].HeaderText = "Port Planet";
-            dtgDades.Columns["PortPlanet1"].HeaderText = "Port Planet1";
+            dtgDades.Columns["PortPlanetL"].HeaderText = "Port Listen";
+            dtgDades.Columns["PortPlanetS"].HeaderText = "Port Send";
         }
     }
 }

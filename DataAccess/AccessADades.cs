@@ -132,7 +132,7 @@ namespace DataAccess
                 {
                     modificats = adapter.Update(dts.Tables[0]);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     modificats = -1;
                 }
@@ -266,6 +266,13 @@ namespace DataAccess
             SqlCommand command = GeneraConsultaStoredProcedure(procedure);
             ExecutaTransaccioNonQuery(command);
         }
+
+        public int ExecutaTransaccioNonQuery(string commandStr) {
+            conn.Open();
+            SqlCommand command = new SqlCommand(commandStr, conn);
+            return ExecutaTransaccioNonQuery(command);
+        }
+
         /// <summary>
         /// This function executes a SQL Query and returns the number of rows affected.
         /// </summary>
@@ -275,7 +282,6 @@ namespace DataAccess
         {
             int modificats = -1;
 
-            conn.Open();
             SqlTransaction sqlTran = conn.BeginTransaction();
 
             command.Transaction = sqlTran;
@@ -284,7 +290,7 @@ namespace DataAccess
                 modificats = command.ExecuteNonQuery();
                 sqlTran.Commit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 sqlTran.Rollback();
             }
