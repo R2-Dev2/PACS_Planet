@@ -15,48 +15,11 @@ namespace SoftwareCentral
     {
         private static string keyName;
         private static string xmlPublicKeyPath = "./planetPublicKey.xml";
-        private static XmlDocument doc = new XmlDocument();
         static AccesADades accesADades = new AccesADades("SecureCore");
         private static string query = "Select * From PlanetKeys";
 
-        private static string GetCodeFromXml(string codeType)
+        public static void GenerateKeys(string idPlanet, string codePlanet)
         {
-            string sendCode = "";
-
-            doc.Load("launchConfig.xml");
-            XmlNodeList tcpSetingsList = doc.GetElementsByTagName("launchConfig");
-            foreach (XmlNode tcpNode in tcpSetingsList)
-            {
-                foreach (XmlNode childNode in tcpNode.ChildNodes)
-                {
-                    if (childNode.Name == codeType)
-                    {
-                        sendCode = childNode.InnerText;
-                        break;
-                    }
-                }
-            }
-
-            return sendCode;
-        }
-
-        private static string GetIdPlanet(string codePlanet)
-        {
-            string idPlanet;
-
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("codePlanet", codePlanet);
-
-            DataSet dataset = accesADades.ExecutaCerca("Planets", dict);
-            idPlanet = dataset.Tables[0].Rows[0]["idPlanet"].ToString();
-
-            return idPlanet;
-        }
-
-        public static void GenerateKeys(string codePlanet)
-        {
-            string idPlanet = GetIdPlanet(codePlanet);
-
             CspParameters cspp = new CspParameters();
             keyName = codePlanet;
 
@@ -88,12 +51,11 @@ namespace SoftwareCentral
 
             accesADades.Actualitzar(query, datasetKeys);
 
-            WriteXmlPublicKey(codePlanet);
+            WriteXmlPublicKey(idPlanet);
         }
 
-        public static string GetPlanetPublickey(string codePlanet)
+        public static string GetPlanetPublickey(string idPlanet)
         {
-            string idPlanet = GetIdPlanet(codePlanet);
             Dictionary<string, string> dictKeys = new Dictionary<string, string>();
             dictKeys.Add("idPlanet", idPlanet);
 
@@ -103,9 +65,9 @@ namespace SoftwareCentral
             return xmlPublicKey;
         }
 
-        private static void WriteXmlPublicKey(string codePlanet)
+        private static void WriteXmlPublicKey(string idPlanet)
         {
-            string xmlPublicKey = GetPlanetPublickey(codePlanet);
+            string xmlPublicKey = GetPlanetPublickey(idPlanet);
             File.WriteAllText(xmlPublicKeyPath, xmlPublicKey);
         }
     }

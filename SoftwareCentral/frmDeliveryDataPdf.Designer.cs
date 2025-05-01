@@ -239,6 +239,7 @@ namespace SoftwareCentral
             this.Controls.Add(this.swTxtShip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDeliveryDataPdf";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDeliveryDataPdf";
             this.Load += new System.EventHandler(this.frmDeliveryDataPdf_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbClose)).EndInit();

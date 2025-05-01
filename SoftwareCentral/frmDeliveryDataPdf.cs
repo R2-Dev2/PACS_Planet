@@ -17,10 +17,9 @@ namespace SoftwareCentral
 {
     public partial class frmDeliveryDataPdf : Form
     {
-        private AccesADades accesADades;
+        public AccesADades accesADades { private get; set; }
         private DataSet dts;
 
-        private string connectionString;
         private string tableName;
         private string query;
 
@@ -119,8 +118,6 @@ namespace SoftwareCentral
         private void frmDeliveryDataPdf_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
-            this.connectionString = "SecureCore";
-            this.accesADades = new AccesADades(this.connectionString);
             this.tableName = "DeliveryDataPdf";
             this.query = $"SELECT * FROM {this.tableName}";
             dts = accesADades.PortarTaula(this.tableName);

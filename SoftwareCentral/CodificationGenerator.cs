@@ -1,57 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Data;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess;
 
 namespace SoftwareCentral
 {
     public static class CodificationGenerator
     {
-        static string[] letters = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-        static RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+        private static AccesADades accesADades = new AccesADades("SecureCore");
 
-        public static List<Codification> GenerateCodification()
+        public static void GeneratePlanetCodification(string idPlanet)
         {
-            List<Codification> codeList = new List<Codification>();
-
-            HashSet<string> codifications = new HashSet<string>();
-            while (codifications.Count < letters.Length)
-            {
-                codifications.Add(GenerateRandomCode(3));
-            }
-
-            for (int i = 0; i < letters.Length; i++)
-            {
-                Codification codification = new Codification();
-                codification.Letter = letters[i];
-                codification.Numbers = codifications.ElementAt(i);
-
-                codeList.Add(codification);
-            }
-
-            return codeList;
-
+            List<Codification> codes = RandomCodeGenerator.GenerateCodification();
+            SaveCodifications(idPlanet, codes);
         }
-        private static int GenerateRandomNumber(int max = 9)
-        {
-            var byteArray = new byte[4];
-            provider.GetBytes(byteArray);
-            var randomInteger = BitConverter.ToUInt32(byteArray, 0) & int.MaxValue;
 
-            return (int)randomInteger % max;
-        }
-        
-        public static string GenerateRandomCode(int size)
+        private static void SaveCodifications(string idPlanet, List<Codification> codifications)
         {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < size; i++)
+            string idInnerEncryption = GetInnerEncryptionId(idPlanet);
+            if (idInnerEncryption == "")
             {
-                sb.Append(GenerateRandomNumber());
+                CreateInnerEncryption(idPlanet);
+                idInnerEncryption = GetInnerEncryptionId(idPlanet);
             }
-            return sb.ToString();
+
+            UpdateInnerEncryptionData(idInnerEncryption, codifications);
+        }
+
+        private static string GetInnerEncryptionId(string idPlanet)
+        {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("idPlanet", idPlanet);
+
+            DataSet dts = accesADades.ExecutaCerca("InnerEncryption", dict);
+            string idInnerEncryption = "";
+            if (dts.Tables[0].Rows.Count > 0)
+            {
+                idInnerEncryption = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+            }
+            return idInnerEncryption;
+        }
+
+        private static void CreateInnerEncryption(string idPlanet)
+        {
+            string query = "SELECT* FROM InnerEncryption";
+            DataSet dts = accesADades.PortarPerConsulta(query);
+            DataRow row = dts.Tables[0].NewRow();
+
+            row["idPlanet"] = idPlanet;
+
+            dts.Tables[0].Rows.Add(row);
+            accesADades.Actualitzar(query, dts);
+        }
+
+        private static void UpdateInnerEncryptionData(string idInnerEncryption, List<Codification> codifications)
+        {
+            string query = "SELECT * FROM InnerEncryptionData";
+            string deleteQuery = $"DELETE FROM InnerEncryptionData WHERE IdInnerEncryption = {idInnerEncryption};";
+
+            accesADades.ExecutaTransaccioNonQuery(deleteQuery);
+            DataSet dts = accesADades.PortarPerConsulta(query);
+
+            foreach (Codification codification in codifications)
+            {
+                DataRow row = dts.Tables[0].NewRow();
+                row["idInnerEncryption"] = idInnerEncryption;
+                row["Word"] = codification.Letter;
+                row["Numbers"] = codification.Numbers;
+
+                dts.Tables[0].Rows.Add(row);
+            }
+
+            accesADades.Actualitzar(query, dts);
         }
     }
 }
