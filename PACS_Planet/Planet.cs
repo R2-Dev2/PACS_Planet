@@ -18,7 +18,7 @@ namespace PACS_Planet
         public string CodePlanet { get; set; }
         public string DescPlanet { get; set; }
         public string PlanetPicture { get; set; }
-        public string PortSend { get; set; }
+        public int PortListen { get; set; }
         public EncodingConfig Encoding { get; private set; }
 
         public bool loadConfig()

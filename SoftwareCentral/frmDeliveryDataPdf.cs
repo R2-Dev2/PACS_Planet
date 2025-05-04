@@ -118,6 +118,7 @@ namespace SoftwareCentral
         private void frmDeliveryDataPdf_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
+            this.accesADades = new AccesADades("SecureCore");
             this.tableName = "DeliveryDataPdf";
             this.query = $"SELECT * FROM {this.tableName}";
             dts = accesADades.PortarTaula(this.tableName);
