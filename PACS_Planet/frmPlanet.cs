@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataAccess;
 using SoftwareCentral;
+using Model;
 using FTP;
 using Workflow;
+using FileUtils;
 using static Workflow.PACSMessage;
 
 namespace PACS_Planet
@@ -20,6 +21,7 @@ namespace PACS_Planet
         private PlanetWorkflow workflow;
         private Planet planet;
         private Client ftpClient;
+        private FileGenerator fileGenerator;
         public frmPlanet()
         {
             InitializeComponent();
@@ -68,6 +70,7 @@ namespace PACS_Planet
                 updateLabel(lblTitle1, "New Entry Access requested");
                 this.workflow = new PlanetWorkflow();
                 this.workflow.PlanetId = this.planet.IdPlanet;
+                this.workflow.Config = this.planet.Encoding;
                 if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
                 {
                     ftpClient.ipDestination = workflow.spaceShipIp;
@@ -80,6 +83,36 @@ namespace PACS_Planet
                 }
                
             }
+        }
+
+        private void GenerateFilesAndZip()
+        {
+            LoadFileGenerator();
+            fileGenerator.GenerateAndZipFiles();
+        }
+
+        private void LoadFileGenerator()
+        {
+            fileGenerator = new FileGenerator();
+            fileGenerator.config = this.planet.Encoding;
+            fileGenerator.ZipFinished += new System.EventHandler(OnZipFinished);
+            fileGenerator.SumFinished += new System.EventHandler(OnSumFinished);
+            fileGenerator.codifications = DatabaseHelper.GetCodifications(planet.IdPlanet);
+        }
+
+
+        public void OnZipFinished(object sender, EventArgs e)
+        {
+            string path = ((FileGenerator.ZipFinishedEventArgs)e).path;
+            AddToListBox($"ZIP ready to send: {path}");
+            enableButton(btnDecodificar, true);
+            enableButton(btn3, true);
+        }
+
+        public void OnSumFinished(object sender, EventArgs e)
+        {
+            long sum = ((FileGenerator.SumFinishedEventArgs)e).sum;
+            AddToListBox($"Sum finished: {sum}");
         }
 
         private void OcultarEncabezados(TabControl tabControl1)
@@ -138,6 +171,21 @@ namespace PACS_Planet
                 lbl.ForeColor = (Color)color;
                 lbl.Text = message;
                 lbl.Refresh();
+            }
+        }
+
+        private void enableButton(Button btn, bool isEnable)
+        {
+            if (btn.InvokeRequired)
+            {
+                btn.Invoke((MethodInvoker)delegate
+                {
+                    btn.Enabled = isEnable;
+                }); 
+            }
+            else
+            {
+                btn.Enabled = isEnable;
             }
         }
 
@@ -222,6 +270,20 @@ namespace PACS_Planet
             string msg = workflow.GetValidationMessage();
             ftpClient.SendMessage(msg);
             AddToListBox($"Sending message {msg} to IP {ftpClient.ipDestination} via {ftpClient.sendPort}");
+        }
+
+        private void btnGenerarFitxer_Click(object sender, EventArgs e)
+        {
+            GenerateFilesAndZip();
+        }
+
+        private void btnDecodificar_Click(object sender, EventArgs e)
+        {
+            fileGenerator.EncodeFilesAndSum();
+        }
+
+        private void btnEnviar3_Click(object sender, EventArgs e)
+        {
         }
     }
 }

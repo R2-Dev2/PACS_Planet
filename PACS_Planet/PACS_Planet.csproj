@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EncodingConfig.cs" />
     <Compile Include="frmPlanet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,7 +62,6 @@
     <Compile Include="frmPlanetFinal.Designer.cs">
       <DependentUpon>frmPlanetFinal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Planet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmPlanet.resx">
@@ -100,9 +98,17 @@
       <Project>{9E7F8EEB-16C6-4C4C-B1A7-9E3DA80133E7}</Project>
       <Name>CustomControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileUtils\FileUtils.csproj">
+      <Project>{20f04cf7-5cb8-4d9e-abdc-000ff8638208}</Project>
+      <Name>FileUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FTP\FTP.csproj">
       <Project>{4e08345b-4513-4cc4-9282-fff600549543}</Project>
       <Name>FTP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{776d92db-b610-4c82-ae42-219239479b33}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoftwareCentral\SoftwareCentral.csproj">
       <Project>{47f57982-112d-4206-b7a2-0cdd358dee4f}</Project>

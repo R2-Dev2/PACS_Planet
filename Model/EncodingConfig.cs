@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PACS_Planet
+namespace Model
 {
-    class EncodingConfig
+    public class EncodingConfig
     {
         public string OriginalFilesPath { get; set; }
         public string EncodedFilesPath { get; set; }

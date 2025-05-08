@@ -4,8 +4,8 @@
     <PlanetCode>MANA</PlanetCode>
   </PlanetConfig>
   <EncodingConfig>
-    <OriginalFilesPath>\files\GeneratedFiles\</OriginalFilesPath>
-    <EncodedFilesPath>\files\ProcessedFiles\</EncodedFilesPath>
+    <OriginalFilesPath>.\files\GeneratedFiles\</OriginalFilesPath>
+    <EncodedFilesPath>.\files\ProcessedFiles\</EncodedFilesPath>
     <NumFiles>1000</NumFiles>
     <NumChars>10000</NumChars>
   </EncodingConfig>

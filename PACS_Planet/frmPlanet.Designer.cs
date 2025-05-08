@@ -35,6 +35,7 @@ namespace PACS_Planet
             this.lbxInfo = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblMsgStatus = new System.Windows.Forms.Label();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.lblTitle1 = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@ namespace PACS_Planet
             this.btn3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMsgStatus = new System.Windows.Forms.Label();
             this.flpFrms.SuspendLayout();
             this.pnlListBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -144,6 +144,16 @@ namespace PACS_Planet
             this.tabPage1.Size = new System.Drawing.Size(662, 599);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
+            // 
+            // lblMsgStatus
+            // 
+            this.lblMsgStatus.AutoSize = true;
+            this.lblMsgStatus.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsgStatus.Location = new System.Drawing.Point(59, 52);
+            this.lblMsgStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMsgStatus.Name = "lblMsgStatus";
+            this.lblMsgStatus.Size = new System.Drawing.Size(0, 23);
+            this.lblMsgStatus.TabIndex = 8;
             // 
             // btnEnviar
             // 
@@ -265,6 +275,7 @@ namespace PACS_Planet
             // 
             // btnDecodificar
             // 
+            this.btnDecodificar.Enabled = false;
             this.btnDecodificar.Location = new System.Drawing.Point(362, 135);
             this.btnDecodificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDecodificar.Name = "btnDecodificar";
@@ -272,16 +283,19 @@ namespace PACS_Planet
             this.btnDecodificar.TabIndex = 9;
             this.btnDecodificar.Text = "Decodificar i Calcular";
             this.btnDecodificar.UseVisualStyleBackColor = true;
+            this.btnDecodificar.Click += new System.EventHandler(this.btnDecodificar_Click);
             // 
             // btnEnviar3
             // 
-            this.btnEnviar3.Location = new System.Drawing.Point(362, 187);
+            this.btnEnviar3.Enabled = false;
+            this.btnEnviar3.Location = new System.Drawing.Point(487, 100);
             this.btnEnviar3.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnviar3.Name = "btnEnviar3";
             this.btnEnviar3.Size = new System.Drawing.Size(68, 32);
             this.btnEnviar3.TabIndex = 8;
             this.btnEnviar3.Text = "Enviar";
             this.btnEnviar3.UseVisualStyleBackColor = true;
+            this.btnEnviar3.Click += new System.EventHandler(this.btnEnviar3_Click);
             // 
             // btnGenerarFitxer
             // 
@@ -292,6 +306,7 @@ namespace PACS_Planet
             this.btnGenerarFitxer.TabIndex = 7;
             this.btnGenerarFitxer.Text = "Generar Fitxer i Comprimir";
             this.btnGenerarFitxer.UseVisualStyleBackColor = true;
+            this.btnGenerarFitxer.Click += new System.EventHandler(this.btnGenerarFitxer_Click);
             // 
             // button1
             // 
@@ -557,16 +572,6 @@ namespace PACS_Planet
             this.label1.Size = new System.Drawing.Size(128, 17);
             this.label1.TabIndex = 10;
             this.label1.Text = "------------------------";
-            // 
-            // lblMsgStatus
-            // 
-            this.lblMsgStatus.AutoSize = true;
-            this.lblMsgStatus.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMsgStatus.Location = new System.Drawing.Point(59, 52);
-            this.lblMsgStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMsgStatus.Name = "lblMsgStatus";
-            this.lblMsgStatus.Size = new System.Drawing.Size(0, 23);
-            this.lblMsgStatus.TabIndex = 8;
             // 
             // frmPlanet
             // 

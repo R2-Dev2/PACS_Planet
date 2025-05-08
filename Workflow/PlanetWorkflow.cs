@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Model;
 using static Workflow.PACSMessage;
 
 namespace Workflow
@@ -17,13 +19,19 @@ namespace Workflow
             set { planetId = value; }
 
         }
+        private EncodingConfig config;
+        public EncodingConfig Config
+        {
+            get { return config; }
+            set { config = value; }
+
+        }
         public string spaceShipIp { get; private set; }
         public int spaceShipPortL { get; private set; }
         private string spaceShipId;
         private string spaceShipCode;
         private ValidationResult status;
         private int step = 0;
-
 
         public bool CheckAccess(EntryMessage msg, string ip)
         {
