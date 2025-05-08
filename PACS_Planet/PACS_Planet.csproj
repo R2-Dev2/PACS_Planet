@@ -152,5 +152,11 @@
   <ItemGroup>
     <None Include="Resources\fonsImage.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nowify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wify.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

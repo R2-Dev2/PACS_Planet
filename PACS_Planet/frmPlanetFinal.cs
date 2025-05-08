@@ -261,7 +261,7 @@ namespace PACS_Planet
                 AddToListBox($"Listening to messages on port {ftpClient.listenPort}");
                 isListening = true;
                 btnStartListening.Text = null;
-                btnStartListening.BackgroundImage = Properties.Resources.listen;
+                btnStartListening.BackgroundImage = Properties.Resources.wify;
                 btnStartListening.BackgroundImageLayout = ImageLayout.Stretch;
             
             }
@@ -271,7 +271,7 @@ namespace PACS_Planet
                 AddToListBox("Stopped listening to messages");
                 isListening = false;
                 btnStartListening.Text = null;
-                btnStartListening.BackgroundImage = Properties.Resources.stop_listen;
+                btnStartListening.BackgroundImage = Properties.Resources.nowify;
                 btnStartListening.BackgroundImageLayout = ImageLayout.Stretch;
             }
         }

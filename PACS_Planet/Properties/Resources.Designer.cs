@@ -123,6 +123,16 @@ namespace PACS_Planet.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap nowify {
+            get {
+                object obj = ResourceManager.GetObject("nowify", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Planet {
             get {
                 object obj = ResourceManager.GetObject("Planet", resourceCulture);
@@ -166,6 +176,16 @@ namespace PACS_Planet.Properties {
         internal static System.Drawing.Bitmap top {
             get {
                 object obj = ResourceManager.GetObject("top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wify {
+            get {
+                object obj = ResourceManager.GetObject("wify", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
