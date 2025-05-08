@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FTP", "FTP\FTP.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow", "Workflow\Workflow.csproj", "{D18E1C41-04A4-4C52-8602-B3338BA830EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypting", "Encrypting\Encrypting.csproj", "{FBC9902C-D923-4FBC-8B67-EFAB5D1C6C20}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{776D92DB-B610-4C82-AE42-219239479B33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtils", "FileUtils\FileUtils.csproj", "{20F04CF7-5CB8-4D9E-ABDC-000FF8638208}"
@@ -57,6 +59,10 @@ Global
 		{20F04CF7-5CB8-4D9E-ABDC-000FF8638208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F04CF7-5CB8-4D9E-ABDC-000FF8638208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F04CF7-5CB8-4D9E-ABDC-000FF8638208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC9902C-D923-4FBC-8B67-EFAB5D1C6C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC9902C-D923-4FBC-8B67-EFAB5D1C6C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC9902C-D923-4FBC-8B67-EFAB5D1C6C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC9902C-D923-4FBC-8B67-EFAB5D1C6C20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

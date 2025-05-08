@@ -102,6 +102,10 @@
       <Project>{20f04cf7-5cb8-4d9e-abdc-000ff8638208}</Project>
       <Name>FileUtils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encrypting\Encrypting.csproj">
+      <Project>{fbc9902c-d923-4fbc-8b67-efab5d1c6c20}</Project>
+      <Name>Encrypting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FTP\FTP.csproj">
       <Project>{4e08345b-4513-4cc4-9282-fff600549543}</Project>
       <Name>FTP</Name>
