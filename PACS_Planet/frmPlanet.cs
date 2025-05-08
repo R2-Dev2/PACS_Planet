@@ -271,7 +271,6 @@ namespace PACS_Planet
 
         private void btnGenerarFitxer_Click(object sender, EventArgs e)
         {
-            GenerateFilesAndZip();
         }
 
         private void btnDecodificar_Click(object sender, EventArgs e)

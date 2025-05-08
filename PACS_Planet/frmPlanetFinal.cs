@@ -14,6 +14,7 @@ using SoftwareCentral;
 using Model;
 using FTP;
 using Workflow;
+using Encrypting;
 using FileUtils;
 using static Workflow.PACSMessage;
 
@@ -81,24 +82,33 @@ namespace PACS_Planet
         private void ProcessMessage(string msg, string ip)
         {
             PACSMessage entryMsg = PACSMessage.ParseMessage(msg);
-            if (MessageType.ER.Equals(entryMsg.type))
+            if (entryMsg == null)
             {
-                updateLabel(lblTitle1, "New Entry Access requested");
-                this.workflow = new PlanetWorkflow();
-                this.workflow.PlanetId = this.planet.IdPlanet;
-                this.workflow.Config = this.planet.Encoding;
-                if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
+                if (workflow.step == 1)
                 {
-                    ftpClient.ipDestination = workflow.spaceShipIp;
-                    ftpClient.sendPort = workflow.spaceShipPortL;
-                    updateLabel(lblMsgStatus, "Delivery scheduled properly", true);
+                    workflow.validateEncrypted(msg);
                 }
-                else
-                {
-                    updateLabel(lblMsgStatus, "Delivery not scheduled", false);
-                }
-
             }
+            else
+            {
+                if (MessageType.ER.Equals(entryMsg.type))
+                {
+                    updateLabel(lblTitle1, "New Entry Access requested");
+                    this.workflow = new PlanetWorkflow();
+                    this.workflow.PlanetId = this.planet.IdPlanet;
+                    if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
+                    {
+                        ftpClient.ipDestination = workflow.spaceShipIp;
+                        ftpClient.sendPort = workflow.spaceShipPortL;
+                        updateLabel(lblMsgStatus, "Delivery scheduled properly", true);
+                    }
+                    else
+                    {
+                        updateLabel(lblMsgStatus, "Delivery not scheduled", false);
+                    }
+                }
+            }
+
         }
 
         private void GenerateFilesAndZip()
@@ -122,7 +132,7 @@ namespace PACS_Planet
             string path = ((FileGenerator.ZipFinishedEventArgs)e).path;
             AddToListBox($"ZIP ready to send: {path}");
             enableButton(btnDecodificar, true);
-            enableButton(btn3, true);
+            enableButton(btnEnviar3, true);
         }
 
         public void OnSumFinished(object sender, EventArgs e)
@@ -324,7 +334,11 @@ namespace PACS_Planet
 
         private void btnGenerarFitxer_Click(object sender, EventArgs e)
         {
-
+            GenerateFilesAndZip();
+        }
+        private void btnEnviar3_Click(object sender, EventArgs e)
+        {
+            //TODO enviar zip
         }
     }
 }
