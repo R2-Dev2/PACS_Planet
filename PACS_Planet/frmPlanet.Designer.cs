@@ -277,6 +277,7 @@ namespace PACS_Planet
             // 
             // btnDecodificar
             // 
+            this.btnDecodificar.Enabled = false;
             this.btnDecodificar.Location = new System.Drawing.Point(362, 135);
             this.btnDecodificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDecodificar.Name = "btnDecodificar";
@@ -284,16 +285,19 @@ namespace PACS_Planet
             this.btnDecodificar.TabIndex = 9;
             this.btnDecodificar.Text = "Decodificar i Calcular";
             this.btnDecodificar.UseVisualStyleBackColor = true;
+            this.btnDecodificar.Click += new System.EventHandler(this.btnDecodificar_Click);
             // 
             // btnEnviar3
             // 
-            this.btnEnviar3.Location = new System.Drawing.Point(362, 187);
+            this.btnEnviar3.Enabled = false;
+            this.btnEnviar3.Location = new System.Drawing.Point(487, 100);
             this.btnEnviar3.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnviar3.Name = "btnEnviar3";
             this.btnEnviar3.Size = new System.Drawing.Size(68, 32);
             this.btnEnviar3.TabIndex = 8;
             this.btnEnviar3.Text = "Enviar";
             this.btnEnviar3.UseVisualStyleBackColor = true;
+            this.btnEnviar3.Click += new System.EventHandler(this.btnEnviar3_Click);
             // 
             // btnGenerarFitxer
             // 
@@ -304,6 +308,7 @@ namespace PACS_Planet
             this.btnGenerarFitxer.TabIndex = 7;
             this.btnGenerarFitxer.Text = "Generar Fitxer i Comprimir";
             this.btnGenerarFitxer.UseVisualStyleBackColor = true;
+            this.btnGenerarFitxer.Click += new System.EventHandler(this.btnGenerarFitxer_Click);
             // 
             // button1
             // 

@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataAccess;
 using SoftwareCentral;
+using Model;
 using Encrypting;
 using FTP;
 using Workflow;
+using FileUtils;
 using static Workflow.PACSMessage;
 
 namespace PACS_Planet
@@ -21,6 +22,7 @@ namespace PACS_Planet
         private PlanetWorkflow workflow;
         private Planet planet;
         private Client ftpClient;
+        private FileGenerator fileGenerator;
         public frmPlanet()
         {
             InitializeComponent();
@@ -152,6 +154,21 @@ namespace PACS_Planet
             }
         }
 
+        private void enableButton(Button btn, bool isEnable)
+        {
+            if (btn.InvokeRequired)
+            {
+                btn.Invoke((MethodInvoker)delegate
+                {
+                    btn.Enabled = isEnable;
+                }); 
+            }
+            else
+            {
+                btn.Enabled = isEnable;
+            }
+        }
+
         private void btn1_Click(object sender, EventArgs e)
         {
             tabControl.SelectedTab = tabPage1;
@@ -250,6 +267,20 @@ namespace PACS_Planet
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnGenerarFitxer_Click(object sender, EventArgs e)
+        {
+            GenerateFilesAndZip();
+        }
+
+        private void btnDecodificar_Click(object sender, EventArgs e)
+        {
+            fileGenerator.EncodeFilesAndSum();
+        }
+
+        private void btnEnviar3_Click(object sender, EventArgs e)
+        {
         }
     }
 }

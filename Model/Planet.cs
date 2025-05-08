@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace PACS_Planet
+namespace Model
 {
-    class Planet
+    public class Planet
     {
         static string xmlPath = "./config.xml";
         static string baseXml = "/ConfigData";

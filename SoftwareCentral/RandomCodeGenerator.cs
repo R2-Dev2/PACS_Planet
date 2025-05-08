@@ -35,6 +35,23 @@ namespace SoftwareCentral
             return codeList;
 
         }
+        
+        public static string GenerateRandomLetters(int size)
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < size; i++)
+            {
+                sb.Append(GenerateRandomLetter());
+            }
+            return sb.ToString();
+        }
+
+        private static string GenerateRandomLetter()
+        {
+            int randNumber = GenerateRandomNumber(letters.Length);
+            return letters[(randNumber % letters.Length)];
+        }
+
         private static int GenerateRandomNumber(int max = 9)
         {
             var byteArray = new byte[4];

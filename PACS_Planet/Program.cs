@@ -16,7 +16,7 @@ namespace PACS_Planet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPlanet());
+            Application.Run(new frmPlanetFinal());
         }
     }
 }
