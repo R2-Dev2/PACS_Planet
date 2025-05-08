@@ -57,11 +57,20 @@
     <Compile Include="frmPlanet.Designer.cs">
       <DependentUpon>frmPlanet.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPlanetFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlanetFinal.Designer.cs">
+      <DependentUpon>frmPlanetFinal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmPlanet.resx">
       <DependentUpon>frmPlanet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlanetFinal.resx">
+      <DependentUpon>frmPlanetFinal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,6 +115,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dawn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Augmentar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Planet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delivery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop_listen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fonsImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
