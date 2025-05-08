@@ -9,7 +9,7 @@ using System.Xml;
 using System.Data;
 using DataAccess;
 
-namespace SoftwareCentral
+namespace Encrypting
 {
     public static class RSA
     {
@@ -69,6 +69,33 @@ namespace SoftwareCentral
         {
             string xmlPublicKey = GetPlanetPublickey(idPlanet);
             File.WriteAllText(xmlPublicKeyPath, xmlPublicKey);
+        }
+
+        public static string EncryptRSA(byte[] dataToEncrypt, string xmlPublicKey)
+        {
+            string dataEncrypted;
+            RSACryptoServiceProvider rsaEnc = new RSACryptoServiceProvider();
+            rsaEnc.FromXmlString(xmlPublicKey);
+
+
+            UnicodeEncoding ByteConverter = new UnicodeEncoding();
+
+            byte[] encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
+
+            dataEncrypted = ByteConverter.GetString(encryptedData);
+
+            return dataEncrypted;
+        }
+
+        public static byte[] DecryptRSA(byte[] dataToDecrypt, string planet)
+        {
+            CspParameters cspp = new CspParameters();
+            cspp.KeyContainerName = planet;
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspp);
+            byte[] datadecrypted = rsa.Decrypt(dataToDecrypt, false);
+
+            return datadecrypted;
         }
     }
 }

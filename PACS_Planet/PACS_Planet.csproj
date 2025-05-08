@@ -91,6 +91,10 @@
       <Project>{9E7F8EEB-16C6-4C4C-B1A7-9E3DA80133E7}</Project>
       <Name>CustomControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encrypting\Encrypting.csproj">
+      <Project>{fbc9902c-d923-4fbc-8b67-efab5d1c6c20}</Project>
+      <Name>Encrypting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FTP\FTP.csproj">
       <Project>{4e08345b-4513-4cc4-9282-fff600549543}</Project>
       <Name>FTP</Name>

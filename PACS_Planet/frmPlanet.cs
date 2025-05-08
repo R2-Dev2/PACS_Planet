@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataAccess;
 using SoftwareCentral;
+using Encrypting;
 using FTP;
 using Workflow;
 using static Workflow.PACSMessage;
@@ -63,23 +64,33 @@ namespace PACS_Planet
         private void ProcessMessage(string msg, string ip)
         {
             PACSMessage entryMsg = PACSMessage.ParseMessage(msg);
-            if (MessageType.ER.Equals(entryMsg.type))
+            if(entryMsg == null)
             {
-                updateLabel(lblTitle1, "New Entry Access requested");
-                this.workflow = new PlanetWorkflow();
-                this.workflow.PlanetId = this.planet.IdPlanet;
-                if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
+                if(workflow.step == 1)
                 {
-                    ftpClient.ipDestination = workflow.spaceShipIp;
-                    ftpClient.sendPort = workflow.spaceShipPortL;
-                    updateLabel(lblMsgStatus, "Delivery scheduled properly", true);
+                    workflow.validateEncrypted(msg);
                 }
-                else
-                {
-                    updateLabel(lblMsgStatus, "Delivery not scheduled", false);
-                }
-               
             }
+            else
+            {
+                if (MessageType.ER.Equals(entryMsg.type))
+                {
+                    updateLabel(lblTitle1, "New Entry Access requested");
+                    this.workflow = new PlanetWorkflow();
+                    this.workflow.PlanetId = this.planet.IdPlanet;
+                    if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
+                    {
+                        ftpClient.ipDestination = workflow.spaceShipIp;
+                        ftpClient.sendPort = workflow.spaceShipPortL;
+                        updateLabel(lblMsgStatus, "Delivery scheduled properly", true);
+                    }
+                    else
+                    {
+                        updateLabel(lblMsgStatus, "Delivery not scheduled", false);
+                    }
+                }
+            }
+
         }
 
         private void OcultarEncabezados(TabControl tabControl1)
@@ -143,22 +154,22 @@ namespace PACS_Planet
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            tabControl.SelectedTab = tabPage1;
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage2;
+            tabControl.SelectedTab = tabPage2;
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage3;
+            tabControl.SelectedTab = tabPage3;
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage4;
+            tabControl.SelectedTab = tabPage4;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -197,7 +208,7 @@ namespace PACS_Planet
             this.ftpClient.listenPort = planet.PortListen;
             this.ftpClient.MessageReceived += new System.EventHandler(OnMessageReceived);
             lblTitle.Text = planet.DescPlanet;
-            OcultarEncabezados(tabControl1);
+            OcultarEncabezados(tabControl);
         }
 
         private void pbClose_Click(object sender, EventArgs e)
@@ -222,6 +233,23 @@ namespace PACS_Planet
             string msg = workflow.GetValidationMessage();
             ftpClient.SendMessage(msg);
             AddToListBox($"Sending message {msg} to IP {ftpClient.ipDestination} via {ftpClient.sendPort}");
+
+            tabControl.Invoke((MethodInvoker)delegate
+            {
+                if (tabControl.SelectedIndex < tabControl.TabCount - 1)
+                {
+                    tabControl.SelectedIndex = tabControl.SelectedIndex + 1;
+                }
+            });
+        }
+
+        private void btnDesencriptarCred_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

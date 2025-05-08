@@ -22,7 +22,11 @@ namespace Workflow
         private string spaceShipId;
         private string spaceShipCode;
         private ValidationResult status;
-        private int step = 0;
+        public int step = 0;
+        public string KeyEncripted = "no";
+        public string IVEncrypted = "no";
+        public string pdfEncrypted = "no";
+        public int encryptedKeyCount = 0;
 
 
         public bool CheckAccess(EntryMessage msg, string ip)
@@ -58,6 +62,24 @@ namespace Workflow
             string listenPort =  row["PortSpaceShipL"].ToString();
             if (int.TryParse(listenPort, out int listenPortInt)) this.spaceShipPortL = listenPortInt;
             else this.spaceShipPortL = 0;
+        }
+
+        public void validateEncrypted(string message)
+        {
+            encryptedKeyCount++;
+
+            if (encryptedKeyCount == 1)
+            {
+                KeyEncripted = message;
+            }
+            else if (encryptedKeyCount == 2)
+            {
+                IVEncrypted = message;
+            }
+            else if (encryptedKeyCount == 3)
+            {
+                pdfEncrypted = message;
+            }
         }
     }
 }

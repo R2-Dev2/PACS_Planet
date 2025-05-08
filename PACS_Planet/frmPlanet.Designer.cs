@@ -33,8 +33,9 @@ namespace PACS_Planet
             this.flpFrms = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlListBox = new System.Windows.Forms.Panel();
             this.lbxInfo = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblMsgStatus = new System.Windows.Forms.Label();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.lblTitle1 = new System.Windows.Forms.Label();
@@ -71,10 +72,9 @@ namespace PACS_Planet
             this.btn3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblMsgStatus = new System.Windows.Forms.Label();
             this.flpFrms.SuspendLayout();
             this.pnlListBox.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -87,7 +87,7 @@ namespace PACS_Planet
             // flpFrms
             // 
             this.flpFrms.Controls.Add(this.pnlListBox);
-            this.flpFrms.Controls.Add(this.tabControl1);
+            this.flpFrms.Controls.Add(this.tabControl);
             this.flpFrms.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flpFrms.Location = new System.Drawing.Point(0, 263);
             this.flpFrms.Margin = new System.Windows.Forms.Padding(2);
@@ -115,20 +115,21 @@ namespace PACS_Planet
             this.lbxInfo.Size = new System.Drawing.Size(255, 364);
             this.lbxInfo.TabIndex = 5;
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(405, 2);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(3, 3);
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(670, 628);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(405, 2);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.Padding = new System.Drawing.Point(3, 3);
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(670, 628);
+            this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -144,6 +145,16 @@ namespace PACS_Planet
             this.tabPage1.Size = new System.Drawing.Size(662, 599);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
+            // 
+            // lblMsgStatus
+            // 
+            this.lblMsgStatus.AutoSize = true;
+            this.lblMsgStatus.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsgStatus.Location = new System.Drawing.Point(59, 52);
+            this.lblMsgStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMsgStatus.Name = "lblMsgStatus";
+            this.lblMsgStatus.Size = new System.Drawing.Size(0, 23);
+            this.lblMsgStatus.TabIndex = 8;
             // 
             // btnEnviar
             // 
@@ -214,6 +225,7 @@ namespace PACS_Planet
             this.btnDesencriptarCred.TabIndex = 9;
             this.btnDesencriptarCred.Text = "Desencriptar Credencials";
             this.btnDesencriptarCred.UseVisualStyleBackColor = true;
+            this.btnDesencriptarCred.Click += new System.EventHandler(this.btnDesencriptarCred_Click);
             // 
             // btnEnviar2
             // 
@@ -558,16 +570,6 @@ namespace PACS_Planet
             this.label1.TabIndex = 10;
             this.label1.Text = "------------------------";
             // 
-            // lblMsgStatus
-            // 
-            this.lblMsgStatus.AutoSize = true;
-            this.lblMsgStatus.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMsgStatus.Location = new System.Drawing.Point(59, 52);
-            this.lblMsgStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMsgStatus.Name = "lblMsgStatus";
-            this.lblMsgStatus.Size = new System.Drawing.Size(0, 23);
-            this.lblMsgStatus.TabIndex = 8;
-            // 
             // frmPlanet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -593,7 +595,7 @@ namespace PACS_Planet
             this.Load += new System.EventHandler(this.frmPlanet_Load);
             this.flpFrms.ResumeLayout(false);
             this.pnlListBox.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -626,7 +628,7 @@ namespace PACS_Planet
         private System.Windows.Forms.Label lblListening;
         private System.Windows.Forms.Button btnStopListening;
         private System.Windows.Forms.Panel pnlListBox;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label lblMsgStatus;
         private System.Windows.Forms.Button btnEnviar;
