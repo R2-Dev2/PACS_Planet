@@ -18,7 +18,8 @@ namespace Model
         public string CodePlanet { get; set; }
         public string DescPlanet { get; set; }
         public string PlanetPicture { get; set; }
-        public int PortListen { get; set; }
+        public int MessagePort { get; set; }
+        public int FilePort { get; set; }
         public EncodingConfig Encoding { get; private set; }
 
         public bool loadConfig()

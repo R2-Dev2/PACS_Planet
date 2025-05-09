@@ -109,6 +109,7 @@ namespace FileUtils
             {
                 while ((number = sr.Read()) != '\r')
                 {
+                    if (number == 0) number = 10;
                     sum += number;
                 }
             }
@@ -122,7 +123,7 @@ namespace FileUtils
                 tFiles.Join();
             }
 
-            string zipFile = $"{config.OriginalFilesPath}/files.zip";
+            string zipFile = $"{config.OriginalFilesPath}/PACS.zip";
             var files = Directory.GetFiles(config.OriginalFilesPath.ToString());
 
             if (File.Exists(zipFile))

@@ -50,12 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmPlanet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPlanet.Designer.cs">
-      <DependentUpon>frmPlanet.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPlanetFinal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,9 +58,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmPlanet.resx">
-      <DependentUpon>frmPlanet.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPlanetFinal.resx">
       <DependentUpon>frmPlanetFinal.cs</DependentUpon>
     </EmbeddedResource>

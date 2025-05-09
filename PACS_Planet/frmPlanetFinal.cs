@@ -27,6 +27,8 @@ namespace PACS_Planet
         private Planet planet;
         private Client ftpClient;
         private FileGenerator fileGenerator;
+        private string planetSum;
+        private string spaceShipSum;
         public frmPlanetFinal()
         {
             InitializeComponent();
@@ -34,22 +36,22 @@ namespace PACS_Planet
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            tabControl.SelectedTab = tabPage1;
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage2;
+            tabControl.SelectedTab = tabPage2;
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage3;
+            tabControl.SelectedTab = tabPage3;
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage4;
+            tabControl.SelectedTab = tabPage4;
         }
 
         private void MakeButtonCircular(Button btn)
@@ -75,7 +77,6 @@ namespace PACS_Planet
         {
             string msg = ((Client.MessageEventArgs)e).msg;
             string ip = ((Client.MessageEventArgs)e).ip;
-            AddToListBox("New message received");
             ProcessMessage(msg, ip);
         }
 
@@ -84,9 +85,14 @@ namespace PACS_Planet
             PACSMessage entryMsg = PACSMessage.ParseMessage(msg);
             if (entryMsg == null)
             {
-                if (workflow.step == 1)
+                if(workflow is null)
                 {
-                    workflow.validateEncrypted(msg);
+                    updateLabel(lblMsgStatus, "Wrong message format", false);
+                }
+                else if(workflow.step == 2)
+                {
+                    spaceShipSum = msg;
+                    enableButton(btnComprovar, true);
                 }
             }
             else
@@ -99,13 +105,15 @@ namespace PACS_Planet
                     if (workflow.CheckAccess((EntryMessage)entryMsg, ip))
                     {
                         ftpClient.ipDestination = workflow.spaceShipIp;
-                        ftpClient.sendPort = workflow.spaceShipPortL;
+                        ftpClient.messagePortS = workflow.shipMsgPort;
+                        ftpClient.filePortS = workflow.shipFilePort;
                         updateLabel(lblMsgStatus, "Delivery scheduled properly", true);
                     }
                     else
                     {
                         updateLabel(lblMsgStatus, "Delivery not scheduled", false);
                     }
+                    enableButton(btnSendResponse1, true);
                 }
             }
 
@@ -132,13 +140,23 @@ namespace PACS_Planet
             string path = ((FileGenerator.ZipFinishedEventArgs)e).path;
             AddToListBox($"ZIP ready to send: {path}");
             enableButton(btnDecodificar, true);
-            enableButton(btnEnviar3, true);
+        }
+
+        public void OnCredentialReceived(object sender, EventArgs e)
+        {
+            string credential = ((Client.CredMessgaeEventArgs)e).credential;
+            enableButton(btnDesencriptarCred, true);
+            workflow.validateEncrypted(credential);
+            AddToListBox("Credential received");
+            AddToListBox(credential);
+
         }
 
         public void OnSumFinished(object sender, EventArgs e)
         {
             long sum = ((FileGenerator.SumFinishedEventArgs)e).sum;
-            AddToListBox($"Sum finished: {sum}");
+            planetSum = sum.ToString();
+            AddToListBox($"Sum finished");
         }
 
         private void AddToListBox(string msg)
@@ -208,14 +226,28 @@ namespace PACS_Planet
             }
         }
 
+        private void nextTab()
+        {
+            tabControl.Invoke((MethodInvoker)delegate
+            {
+                if (tabControl.SelectedIndex < tabControl.TabCount - 1)
+                {
+                    tabControl.SelectedIndex = tabControl.SelectedIndex + 1;
+                }
+            });
+        }
+
         private void frmPlanetFinal_Load(object sender, EventArgs e)
         {
             loadPlanetData();
             this.ftpClient = new Client();
-            this.ftpClient.listenPort = planet.PortListen;
+            this.ftpClient.messagePortL = planet.MessagePort;
+            this.ftpClient.filePortL = planet.FilePort;
             this.ftpClient.MessageReceived += new System.EventHandler(OnMessageReceived);
+            this.ftpClient.CredentialReceived += new System.EventHandler(OnCredentialReceived);
+
             lblTitle.Text = planet.DescPlanet;
-            OcultarEncabezados(tabControl1);
+            OcultarEncabezados(tabControl);
             MakeButtonCircular(btn1);
             MakeButtonCircular(btn2);
             MakeButtonCircular(btn3);
@@ -244,10 +276,12 @@ namespace PACS_Planet
             }
             pbPlanet.Image = img;
             
-            string portListenStr = planetRow["PortPlanetL"].ToString();
-            if (int.TryParse(portListenStr, out int portListen))
+            string messagePortStr = planetRow["PortPlanetL"].ToString();
+            string filePortStr = planetRow["PortPlanetS"].ToString();
+            if (int.TryParse(messagePortStr, out int msgPort) && int.TryParse(filePortStr, out int filePort))
             {
-                planet.PortListen = portListen;
+                planet.MessagePort = msgPort;
+                planet.FilePort = filePort;
             }
             else
             {
@@ -268,7 +302,7 @@ namespace PACS_Planet
             if (!isListening)
             {
                 ftpClient.StartListening();
-                AddToListBox($"Listening to messages on port {ftpClient.listenPort}");
+                AddToListBox($"Listening to messages on port {ftpClient.messagePortL}");
                 isListening = true;
                 btnStartListening.Text = null;
                 btnStartListening.BackgroundImage = Properties.Resources.wify;
@@ -286,23 +320,9 @@ namespace PACS_Planet
             }
         }
 
-        private void button8_Click_1(object sender, EventArgs e)
+        private void pnlClose_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage3;
-        }
-
-        private void button7_Click_1(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage2;
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage4;
-        }
-
-        private void panel12_Click(object sender, EventArgs e)
-        {
+            ftpClient.StopListening();
             this.Close();
         }
 
@@ -329,7 +349,7 @@ namespace PACS_Planet
         {
             string msg = workflow.GetValidationMessage();
             ftpClient.SendMessage(msg);
-            AddToListBox($"Sending message {msg} to IP {ftpClient.ipDestination} via {ftpClient.sendPort}");
+            nextTab();
         }
 
         private void btnGenerarFitxer_Click(object sender, EventArgs e)
@@ -338,7 +358,61 @@ namespace PACS_Planet
         }
         private void btnEnviar3_Click(object sender, EventArgs e)
         {
-            //TODO enviar zip
+            ftpClient.SendFileTCP($"{planet.Encoding.OriginalFilesPath}/PACS.zip");
+            nextTab();
+        }
+
+        private void btnDesencriptarCred_Click(object sender, EventArgs e)
+        {
+            workflow.DecryptCredentials(planet.CodePlanet);
+            enableButton(btnDesencriptarPDF, true);
+        }
+
+        private void btnDesencriptarPDF_Click(object sender, EventArgs e)
+        {
+            workflow.DecryptDeliveryPdf();
+            enableButton(btnCheckPdf, true);
+        }
+
+        private void btnComprovar_Click(object sender, EventArgs e)
+        {
+            bool isValid = workflow.CheckSums(planetSum, spaceShipSum);
+            if (isValid){
+                AddToListBox("Sums match: ACCESS GRANTED");
+            }
+            else
+            {
+                AddToListBox("Sums do not match: ACCES DENIED");
+            }
+            string msg = workflow.GetValidationMessage();
+            ftpClient.SendMessage(msg);
+        }
+
+        private void btnEnviar2_Click(object sender, EventArgs e)
+        {
+            string msg = workflow.GetValidationMessage();
+            ftpClient.SendMessage(msg);
+            nextTab();
+        }
+
+        private void btnCheckPdf_Click(object sender, EventArgs e)
+        {
+            if (workflow.CheckPdf())
+            {
+                AddToListBox("Document is correct");
+            }
+            else
+            {
+                AddToListBox("Document is incorrect");
+            }
+            enableButton(btnEnviar2, true);
+                
+        }
+
+        private void btnDecodificar_Click(object sender, EventArgs e)
+        {
+            fileGenerator.EncodeFilesAndSum();
+            enableButton(btnEnviar3, true);
         }
     }
 }

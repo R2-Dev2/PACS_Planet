@@ -51,6 +51,10 @@
       <Project>{bc79cd08-7f0e-4fe4-8abf-dab9c999b869}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encrypting\Encrypting.csproj">
+      <Project>{fbc9902c-d923-4fbc-8b67-efab5d1c6c20}</Project>
+      <Name>Encrypting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{776d92db-b610-4c82-ae42-219239479b33}</Project>
       <Name>Model</Name>

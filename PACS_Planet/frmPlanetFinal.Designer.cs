@@ -31,29 +31,26 @@ namespace PACS_Planet
         {
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMsgStatus = new System.Windows.Forms.Label();
             this.btnSendResponse1 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.lblTitle1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnCheckPdf = new System.Windows.Forms.Button();
             this.btnDesencriptarPDF = new System.Windows.Forms.Button();
             this.btnDesencriptarCred = new System.Windows.Forms.Button();
             this.btnEnviar2 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnDecodificar = new System.Windows.Forms.Button();
             this.btnEnviar3 = new System.Windows.Forms.Button();
             this.btnGenerarFitxer = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.labelTitle3 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btnEnviar4 = new System.Windows.Forms.Button();
             this.btnComprovar = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblTitle4 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel18 = new System.Windows.Forms.Panel();
             this.pbPlanet = new System.Windows.Forms.PictureBox();
@@ -61,7 +58,7 @@ namespace PACS_Planet
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.pnlClose = new System.Windows.Forms.Panel();
             this.btnStartListening = new System.Windows.Forms.Button();
             this.btn4 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -83,7 +80,7 @@ namespace PACS_Planet
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -107,9 +104,9 @@ namespace PACS_Planet
             // 
             this.panel4.BackgroundImage = global::PACS_Planet.Properties.Resources.fonsImage;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel4.Controls.Add(this.tabControl1);
+            this.panel4.Controls.Add(this.tabControl);
             this.panel4.Controls.Add(this.panel13);
-            this.panel4.Controls.Add(this.panel12);
+            this.panel4.Controls.Add(this.pnlClose);
             this.panel4.Controls.Add(this.btnStartListening);
             this.panel4.Controls.Add(this.btn4);
             this.panel4.Controls.Add(this.panel5);
@@ -128,19 +125,19 @@ namespace PACS_Planet
             this.panel4.Size = new System.Drawing.Size(1295, 374);
             this.panel4.TabIndex = 3;
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(809, 85);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(3, 3);
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(993, 480);
-            this.tabControl1.TabIndex = 82;
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Location = new System.Drawing.Point(809, 85);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.Padding = new System.Drawing.Point(3, 3);
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(993, 480);
+            this.tabControl.TabIndex = 82;
             // 
             // tabPage1
             // 
@@ -148,7 +145,6 @@ namespace PACS_Planet
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lblMsgStatus);
             this.tabPage1.Controls.Add(this.btnSendResponse1);
-            this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.lblTitle1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
@@ -180,8 +176,9 @@ namespace PACS_Planet
             // 
             // btnSendResponse1
             // 
+            this.btnSendResponse1.Enabled = false;
             this.btnSendResponse1.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendResponse1.Location = new System.Drawing.Point(63, 146);
+            this.btnSendResponse1.Location = new System.Drawing.Point(26, 146);
             this.btnSendResponse1.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendResponse1.Name = "btnSendResponse1";
             this.btnSendResponse1.Size = new System.Drawing.Size(170, 38);
@@ -190,22 +187,11 @@ namespace PACS_Planet
             this.btnSendResponse1.UseVisualStyleBackColor = true;
             this.btnSendResponse1.Click += new System.EventHandler(this.btnSendResponse1_Click);
             // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(566, 348);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(81, 26);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Next";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click_1);
-            // 
             // lblTitle1
             // 
             this.lblTitle1.AutoSize = true;
             this.lblTitle1.Font = new System.Drawing.Font("Cambria", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle1.Location = new System.Drawing.Point(57, 20);
+            this.lblTitle1.Location = new System.Drawing.Point(20, 20);
             this.lblTitle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle1.Name = "lblTitle1";
             this.lblTitle1.Size = new System.Drawing.Size(260, 32);
@@ -215,10 +201,10 @@ namespace PACS_Planet
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tabPage2.Controls.Add(this.btnCheckPdf);
             this.tabPage2.Controls.Add(this.btnDesencriptarPDF);
             this.tabPage2.Controls.Add(this.btnDesencriptarCred);
             this.tabPage2.Controls.Add(this.btnEnviar2);
-            this.tabPage2.Controls.Add(this.button8);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
@@ -228,57 +214,69 @@ namespace PACS_Planet
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
+            // btnCheckPdf
+            // 
+            this.btnCheckPdf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCheckPdf.Enabled = false;
+            this.btnCheckPdf.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckPdf.Location = new System.Drawing.Point(25, 195);
+            this.btnCheckPdf.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCheckPdf.Name = "btnCheckPdf";
+            this.btnCheckPdf.Size = new System.Drawing.Size(111, 52);
+            this.btnCheckPdf.TabIndex = 83;
+            this.btnCheckPdf.Text = "Check Integrity";
+            this.btnCheckPdf.UseVisualStyleBackColor = true;
+            this.btnCheckPdf.Click += new System.EventHandler(this.btnCheckPdf_Click);
+            // 
             // btnDesencriptarPDF
             // 
-            this.btnDesencriptarPDF.Location = new System.Drawing.Point(342, 134);
+            this.btnDesencriptarPDF.Enabled = false;
+            this.btnDesencriptarPDF.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesencriptarPDF.Location = new System.Drawing.Point(25, 133);
             this.btnDesencriptarPDF.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesencriptarPDF.Name = "btnDesencriptarPDF";
             this.btnDesencriptarPDF.Size = new System.Drawing.Size(111, 49);
             this.btnDesencriptarPDF.TabIndex = 10;
-            this.btnDesencriptarPDF.Text = "Desencriptar PDF";
+            this.btnDesencriptarPDF.Text = "Decrypt PDF";
             this.btnDesencriptarPDF.UseVisualStyleBackColor = true;
+            this.btnDesencriptarPDF.Click += new System.EventHandler(this.btnDesencriptarPDF_Click);
             // 
             // btnDesencriptarCred
             // 
-            this.btnDesencriptarCred.Location = new System.Drawing.Point(342, 81);
+            this.btnDesencriptarCred.Enabled = false;
+            this.btnDesencriptarCred.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesencriptarCred.Location = new System.Drawing.Point(25, 67);
             this.btnDesencriptarCred.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesencriptarCred.Name = "btnDesencriptarCred";
             this.btnDesencriptarCred.Size = new System.Drawing.Size(111, 49);
             this.btnDesencriptarCred.TabIndex = 9;
-            this.btnDesencriptarCred.Text = "Desencriptar Credencials";
+            this.btnDesencriptarCred.Text = "Decrypt AES";
             this.btnDesencriptarCred.UseVisualStyleBackColor = true;
+            this.btnDesencriptarCred.Click += new System.EventHandler(this.btnDesencriptarCred_Click);
             // 
             // btnEnviar2
             // 
-            this.btnEnviar2.Location = new System.Drawing.Point(342, 187);
+            this.btnEnviar2.Enabled = false;
+            this.btnEnviar2.Font = new System.Drawing.Font("Calisto MT", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnviar2.Location = new System.Drawing.Point(280, 217);
             this.btnEnviar2.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnviar2.Name = "btnEnviar2";
             this.btnEnviar2.Size = new System.Drawing.Size(83, 30);
             this.btnEnviar2.TabIndex = 8;
-            this.btnEnviar2.Text = "Enviar";
+            this.btnEnviar2.Text = "Send";
             this.btnEnviar2.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(566, 348);
-            this.button8.Margin = new System.Windows.Forms.Padding(2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(81, 26);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Next";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            this.btnEnviar2.Click += new System.EventHandler(this.btnEnviar2_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Cambria", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(278, 22);
+            this.label6.Location = new System.Drawing.Point(19, 20);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(291, 32);
+            this.label6.Size = new System.Drawing.Size(244, 32);
             this.label6.TabIndex = 5;
-            this.label6.Text = "ENVIANT MISSATGE VR";
+            this.label6.Text = "Decrypt Credentials";
             // 
             // tabPage3
             // 
@@ -286,7 +284,6 @@ namespace PACS_Planet
             this.tabPage3.Controls.Add(this.btnDecodificar);
             this.tabPage3.Controls.Add(this.btnEnviar3);
             this.tabPage3.Controls.Add(this.btnGenerarFitxer);
-            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.labelTitle3);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
@@ -299,18 +296,19 @@ namespace PACS_Planet
             // btnDecodificar
             // 
             this.btnDecodificar.Enabled = false;
-            this.btnDecodificar.Location = new System.Drawing.Point(67, 141);
+            this.btnDecodificar.Location = new System.Drawing.Point(33, 141);
             this.btnDecodificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDecodificar.Name = "btnDecodificar";
             this.btnDecodificar.Size = new System.Drawing.Size(110, 42);
             this.btnDecodificar.TabIndex = 9;
             this.btnDecodificar.Text = "Codify and calculate sum";
             this.btnDecodificar.UseVisualStyleBackColor = true;
+            this.btnDecodificar.Click += new System.EventHandler(this.btnDecodificar_Click);
             // 
             // btnEnviar3
             // 
             this.btnEnviar3.Enabled = false;
-            this.btnEnviar3.Location = new System.Drawing.Point(204, 88);
+            this.btnEnviar3.Location = new System.Drawing.Point(170, 88);
             this.btnEnviar3.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnviar3.Name = "btnEnviar3";
             this.btnEnviar3.Size = new System.Drawing.Size(94, 33);
@@ -321,7 +319,7 @@ namespace PACS_Planet
             // 
             // btnGenerarFitxer
             // 
-            this.btnGenerarFitxer.Location = new System.Drawing.Point(67, 70);
+            this.btnGenerarFitxer.Location = new System.Drawing.Point(33, 70);
             this.btnGenerarFitxer.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerarFitxer.Name = "btnGenerarFitxer";
             this.btnGenerarFitxer.Size = new System.Drawing.Size(110, 51);
@@ -330,22 +328,11 @@ namespace PACS_Planet
             this.btnGenerarFitxer.UseVisualStyleBackColor = true;
             this.btnGenerarFitxer.Click += new System.EventHandler(this.btnGenerarFitxer_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(566, 348);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 26);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Next";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // labelTitle3
             // 
             this.labelTitle3.AutoSize = true;
             this.labelTitle3.Font = new System.Drawing.Font("Cambria", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle3.Location = new System.Drawing.Point(61, 20);
+            this.labelTitle3.Location = new System.Drawing.Point(27, 20);
             this.labelTitle3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTitle3.Name = "labelTitle3";
             this.labelTitle3.Size = new System.Drawing.Size(199, 32);
@@ -355,9 +342,8 @@ namespace PACS_Planet
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tabPage4.Controls.Add(this.btnEnviar4);
             this.tabPage4.Controls.Add(this.btnComprovar);
-            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.Controls.Add(this.lblTitle4);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
@@ -366,36 +352,29 @@ namespace PACS_Planet
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             // 
-            // btnEnviar4
-            // 
-            this.btnEnviar4.Location = new System.Drawing.Point(141, 161);
-            this.btnEnviar4.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEnviar4.Name = "btnEnviar4";
-            this.btnEnviar4.Size = new System.Drawing.Size(79, 35);
-            this.btnEnviar4.TabIndex = 8;
-            this.btnEnviar4.Text = "Enviar";
-            this.btnEnviar4.UseVisualStyleBackColor = true;
-            // 
             // btnComprovar
             // 
-            this.btnComprovar.Location = new System.Drawing.Point(141, 104);
+            this.btnComprovar.Enabled = false;
+            this.btnComprovar.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComprovar.Location = new System.Drawing.Point(30, 104);
             this.btnComprovar.Margin = new System.Windows.Forms.Padding(2);
             this.btnComprovar.Name = "btnComprovar";
-            this.btnComprovar.Size = new System.Drawing.Size(107, 45);
+            this.btnComprovar.Size = new System.Drawing.Size(145, 45);
             this.btnComprovar.TabIndex = 7;
-            this.btnComprovar.Text = "Comprovar total calculat";
+            this.btnComprovar.Text = "Check sums";
             this.btnComprovar.UseVisualStyleBackColor = true;
+            this.btnComprovar.Click += new System.EventHandler(this.btnComprovar_Click);
             // 
-            // label8
+            // lblTitle4
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Cambria", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(24, 24);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(291, 32);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "ENVIANT MISSATGE VR";
+            this.lblTitle4.AutoSize = true;
+            this.lblTitle4.Font = new System.Drawing.Font("Cambria", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle4.Location = new System.Drawing.Point(24, 24);
+            this.lblTitle4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle4.Name = "lblTitle4";
+            this.lblTitle4.Size = new System.Drawing.Size(151, 32);
+            this.lblTitle4.TabIndex = 4;
+            this.lblTitle4.Text = "Check sums";
             // 
             // panel13
             // 
@@ -471,17 +450,17 @@ namespace PACS_Planet
             this.panel17.Size = new System.Drawing.Size(341, 28);
             this.panel17.TabIndex = 0;
             // 
-            // panel12
+            // pnlClose
             // 
-            this.panel12.BackColor = System.Drawing.Color.Transparent;
-            this.panel12.BackgroundImage = global::PACS_Planet.Properties.Resources.close;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel12.Location = new System.Drawing.Point(1953, 4);
-            this.panel12.Margin = new System.Windows.Forms.Padding(2);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(41, 37);
-            this.panel12.TabIndex = 77;
-            this.panel12.Click += new System.EventHandler(this.panel12_Click);
+            this.pnlClose.BackColor = System.Drawing.Color.Transparent;
+            this.pnlClose.BackgroundImage = global::PACS_Planet.Properties.Resources.close;
+            this.pnlClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlClose.Location = new System.Drawing.Point(1953, 4);
+            this.pnlClose.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlClose.Name = "pnlClose";
+            this.pnlClose.Size = new System.Drawing.Size(41, 37);
+            this.pnlClose.TabIndex = 77;
+            this.pnlClose.Click += new System.EventHandler(this.pnlClose_Click);
             // 
             // btnStartListening
             // 
@@ -732,7 +711,7 @@ namespace PACS_Planet
             this.Load += new System.EventHandler(this.frmPlanetFinal_Load);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -775,7 +754,7 @@ namespace PACS_Planet
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btnStartListening;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel pnlClose;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Panel panel15;
@@ -783,28 +762,25 @@ namespace PACS_Planet
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.PictureBox pbPlanet;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label lblMsgStatus;
         private System.Windows.Forms.Button btnSendResponse1;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label lblTitle1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnDesencriptarPDF;
         private System.Windows.Forms.Button btnDesencriptarCred;
         private System.Windows.Forms.Button btnEnviar2;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button btnDecodificar;
         private System.Windows.Forms.Button btnEnviar3;
         private System.Windows.Forms.Button btnGenerarFitxer;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelTitle3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button btnEnviar4;
         private System.Windows.Forms.Button btnComprovar;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTitle4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCheckPdf;
     }
 }

@@ -25,10 +25,12 @@ namespace Encrypting
 
             cspp.KeyContainerName = keyName;
 
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspp);
-            rsa.PersistKeyInCsp = true;
-
-            string publicKey = rsa.ToXmlString(false);
+            string publicKey;
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspp))
+            {
+                rsa.PersistKeyInCsp = true;
+                publicKey = rsa.ToXmlString(false);
+            }
 
             Dictionary<string, string> dictKeys = new Dictionary<string, string>();
             dictKeys.Add("idPlanet", idPlanet);
@@ -71,29 +73,16 @@ namespace Encrypting
             File.WriteAllText(xmlPublicKeyPath, xmlPublicKey);
         }
 
-        public static string EncryptRSA(byte[] dataToEncrypt, string xmlPublicKey)
-        {
-            string dataEncrypted;
-            RSACryptoServiceProvider rsaEnc = new RSACryptoServiceProvider();
-            rsaEnc.FromXmlString(xmlPublicKey);
-
-
-            UnicodeEncoding ByteConverter = new UnicodeEncoding();
-
-            byte[] encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
-
-            dataEncrypted = ByteConverter.GetString(encryptedData);
-
-            return dataEncrypted;
-        }
-
         public static byte[] DecryptRSA(byte[] dataToDecrypt, string planet)
         {
-            CspParameters cspp = new CspParameters();
+            CspParameters cspp = new CspParameters(); 
             cspp.KeyContainerName = planet;
 
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(cspp);
-            byte[] datadecrypted = rsa.Decrypt(dataToDecrypt, false);
+            byte[] datadecrypted; 
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048, cspp))
+            {
+                datadecrypted = rsa.Decrypt(dataToDecrypt, false);
+            }           
 
             return datadecrypted;
         }

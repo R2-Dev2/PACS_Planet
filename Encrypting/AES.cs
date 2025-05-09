@@ -25,32 +25,21 @@ namespace Encrypting
             return dataDecrypted;
         }
 
-        public static void DescryptAesPdf(byte[] dadesXifrades, byte[] key, byte[] iv)
+        public static byte[] DescryptAesPdf(byte[] key, byte[] iv, byte[] pdfEncrypted)
         {
             using (Aes aes = Aes.Create())
             {
                 aes.Key = key;
                 aes.IV = iv;
 
-                using (MemoryStream ms = new MemoryStream(dadesXifrades))
+                using(MemoryStream ms = new MemoryStream(pdfEncrypted))
                 using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
-                using (StreamReader sr = new StreamReader(cs))
+                using (MemoryStream result = new MemoryStream())
                 {
-                    string dadesOriginals = sr.ReadToEnd();
-
-                    // comprovació de les metadades del pdf --> frmDeliveryDataPdf.cs --> BuildPdf
-                    // descarregar el pdf de la base de dades 
+                    cs.CopyTo(result);
+                    return result.ToArray();
                 }
             }
-        }
-
-        private static void DownloadPDF(string codeDelivery)
-        {
-            string query = $"SELECT DocumentPdf FROM DeliveryDataPdf WHERE CodeDelivery = {codeDelivery}";
-            DataSet dts = new DataSet();
-            dts = accesADades.PortarPerConsulta(query);
-
-
         }
     }
 }
